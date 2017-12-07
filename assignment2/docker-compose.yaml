@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  webserver:
+    build: webserver 
+    restart: always
+    ports:
+      - 80:80
+    command: ["gunicorn", "-b", ":80", "-w4", "flask_app:app"]
+    links:
+      - myredis
+  myredis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./myredis/redis.conf:/etc/redis.conf
+    

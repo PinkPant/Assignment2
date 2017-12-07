@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% if current_user.is_authenticated %}
+        {{ current_user.name }}
+        <a href="{{ url_for("logout") }}">Logout</a>
+    {% endif %}
+
+    {% if form %}
+        {% for key in form.errors %}
+            {% for error in form.errors[key] %}
+                <p>{{ key }} - {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
+

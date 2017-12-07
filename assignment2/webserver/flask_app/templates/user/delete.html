@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form action="{{ request.path }}" method="post">
+        {{ form.csrf_token }}
+
+        {{ form.name() }}
+        <p>Confirm {{ form.name.data }} deletion</p>
+
+        <a href="{{ url_for("user_list") }}">Go back</a>
+        <button type="submit">Delete</button>
+    </form>
+{% endblock %}
+

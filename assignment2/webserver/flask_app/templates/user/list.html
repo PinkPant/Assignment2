@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if current_user.is_admin %}
+        <a href="{{ url_for("user_create") }}">Add User</a>
+    {% endif %}
+    {% if obj_list|length %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Is Admin</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in obj_list %}
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.is_admin }}</td>
+                        <td>
+                            {% if current_user.is_admin %}
+                                <a href="{{ url_for("user_update", name=user.name) }}">Update</a>
+                                <a href="{{ url_for("user_delete", name=user.name) }}">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
+

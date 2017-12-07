@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form action="{{ request.path }}" method="post">
+        {{ form.csrf_token }}
+
+        <p><label for="name">{{ form.name.label }}</label> {{ form.name() }}</p>
+        <p><label for="password">{{ form.password.label }}</label> {{ form.password() }}</p>
+        <p><label for="password_confirm">{{ form.password_confirm.label }}</label> {{ form.password_confirm() }}</p>
+        <p><label for="superuser">{{ form.superuser.label }}</label> {{ form.superuser() }}</p>
+
+        <a href="{{ url_for("user_list") }}">Go back</a>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
+
