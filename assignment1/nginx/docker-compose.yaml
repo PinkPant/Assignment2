@@ -1,0 +1,9 @@
+version: '2'
+services:
+ nginx:
+  restart: always
+  build: .
+  ports:
+    - "80:80"
+  volumes:
+    - .:/usr/share/html

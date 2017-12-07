@@ -1,0 +1,10 @@
+version: '2'
+services:
+ expressjs:
+    build: .
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - .:/code
+      - /code/node_modules
